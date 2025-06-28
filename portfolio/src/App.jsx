@@ -228,9 +228,7 @@ const App = () => {
               <p className="text-lg text-gray-300 mb-4 leading-relaxed">
                 Hello! I'm Azam Destiny, a passionate and results-driven developer with a strong focus on the intersection of blockchain technology, modern web applications, and intuitive mobile experiences. My journey began with a fascination for decentralized systems, which quickly evolved into a dedicated pursuit of mastering the tools and technologies that power the future of digital interaction.
               </p>
-              <p className="text-lg text-gray-300 mb-4 leading-relaxed">
-                With a robust background in full-stack development, I specialize in crafting secure smart contracts, building responsive and dynamic front-ends with React/Next.js, and developing seamless cross-platform mobile applications using React Native. I thrive in challenging environments and am always eager to learn and implement the latest advancements in the tech landscape.
-              </p>
+              
               <p className="text-lg text-gray-300 leading-relaxed">
                 My goal is to create impactful solutions that not only solve complex problems but also deliver exceptional user experiences. Let's build something amazing together!
               </p>
