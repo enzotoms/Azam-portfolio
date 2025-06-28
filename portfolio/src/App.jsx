@@ -48,7 +48,7 @@ const App = () => {
     { category: 'Blockchain & Smart Contracts', icon: <ShieldCheck size={24} />, items: ['Solidity', 'Ethereum', 'Web3.js', 'Hardhat', 'Truffle', 'IPFS', 'ERC Standards (20, 721, 1155)', 'DeFi Protocols'] },
     { category: 'Web Development', icon: <Code size={24} />, items: ['React.js', 'Next.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL', 'RESTful APIs', 'GraphQL'] },
     { category: 'Mobile Development', icon: <Smartphone size={24} />, items: ['React Native', 'Swift (iOS)', 'Kotlin (Android)', 'Flutter', 'Firebase', 'APIs for Mobile'] },
-    { category: 'General Programming', icon: <Database size={24} />, items: ['JavaScript (ES6+)', 'TypeScript', 'Python', 'Go', 'Git & GitHub', 'CI/CD'] },
+    { category: 'General Programming', icon: <Database size={24} />, items: ['JavaScript (ES6+)', 'TypeScript', 'Python', 'Git & GitHub', 'CI/CD'] },
   ];
 
   const projects = [
@@ -82,26 +82,7 @@ const App = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Alex Johnson",
-      title: "CTO, Blockchain Solutions Inc.",
-      quote: "John's expertise in Solidity and Web3.js is exceptional. He delivered our smart contract project ahead of schedule and with flawless execution. A true asset to any blockchain team.",
-      rating: 5,
-    },
-    {
-      name: "Sarah Chen",
-      title: "Lead Product Manager, Mobile Innovations",
-      quote: "The mobile app John developed for us was incredibly well-built, performant, and beautifully designed. His attention to detail and understanding of user experience truly shine.",
-      rating: 5,
-    },
-    {
-      name: "Michael Davis",
-      title: "Founder, Decentralized Future",
-      quote: "Working with John on our dApp was a game-changer. His ability to translate complex blockchain concepts into a user-friendly interface is remarkable. Highly recommend!",
-      rating: 4,
-    },
-  ];
+  
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 font-inter antialiased">
@@ -322,7 +303,7 @@ const App = () => {
         </section>
 
         {/* Testimonials Section (Optional) */}
-        <section id="testimonials" className="py-16 md:py-24 bg-gray-950 px-6 sm:px-10 lg:px-20">
+        {/* <section id="testimonials" className="py-16 md:py-24 bg-gray-950 px-6 sm:px-10 lg:px-20">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">
               What People <span className="text-gradient">Say</span>
@@ -350,7 +331,7 @@ const App = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
 
         {/* Contact Section */}
@@ -377,10 +358,10 @@ const App = () => {
               </a>
             </div>
             <div className="flex justify-center space-x-6">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://github.com/azamdestiny" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors duration-300">
                 <Github size={36} />
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://linkedin.com/in/azamdestiny" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors duration-300">
                 <Linkedin size={36} />
               </a>
               {/* Add more social icons if needed, e.g., Twitter, Medium */}
