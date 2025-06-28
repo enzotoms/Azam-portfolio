@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Github, Linkedin, Smartphone,
    Code, TrendingUp, DollarSign, Wallet, ShieldCheck,
     Database, LayoutGrid, Palette, Rocket, User, Briefcase, Star } from 'lucide-react'; // Using Lucide React for icons
+import { PiTelegramLogo } from "react-icons/pi";
+
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -349,10 +351,10 @@ const App = () => {
                 <Mail className="mr-3" size={20} /> zamzamdestiny@gmail.com
               </a>
               <a
-                href="tel:+1234567890"
+                href="https://t.me/AZAM_DESTINY"
                 className="flex items-center justify-center bg-gray-800 text-white py-3 px-6 rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105"
               >
-                <Smartphone className="mr-3" size={20} /> +1 (234) 567-890
+                <PiTelegramLogo className="mr-3" size={20} /> Telegram
               </a>
             </div>
             <div className="flex justify-center space-x-6">
