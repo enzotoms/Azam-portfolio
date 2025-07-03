@@ -1,13 +1,95 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Github, Linkedin, Smartphone,
    Code, TrendingUp, DollarSign, Wallet, ShieldCheck,
-    Database, LayoutGrid, Palette, Rocket, User, Briefcase, Star } from 'lucide-react'; // Using Lucide React for icons
+    Database, LayoutGrid, Palette, Rocket, User, Briefcase, Star, Send, Calendar, Link, 
+    MessageCircle,
+    Phone,
+    MapPin,
+    Twitter} from 'lucide-react'; // Using Lucide React for icons
 import { PiTelegramLogo } from "react-icons/pi";
 
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+    const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    projectType: '',
+    requirements: '',
+    budget: '',
+    deadline: '',
+    examples: '',
+    additionalInfo: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+   // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Create email body
+    const emailBody = `
+New Project Inquiry from ${formData.name}
+
+Contact Information:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Company: ${formData.company || 'Not specified'}
+
+Project Details:
+- Project Type: ${formData.projectType}
+- Requirements: ${formData.requirements}
+- Budget: ${formData.budget}
+- Deadline: ${formData.deadline}
+- Reference Examples: ${formData.examples || 'None provided'}
+- Additional Information: ${formData.additionalInfo || 'None provided'}
+
+Please respond to this inquiry at your earliest convenience.
+    `.trim();
+
+      // Create mailto link
+    const mailtoLink = `mailto:zamzamdestiny@gmail.com?subject=New Project Inquiry from ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Reset form after a brief delay
+    setTimeout(() => {
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        projectType: '',
+        requirements: '',
+        budget: '',
+        deadline: '',
+        examples: '',
+        additionalInfo: ''
+      });
+
+      setIsSubmitting(false);
+      setSubmitMessage('Thank you! Your email client should open with your project details. Please send the email to complete your inquiry.');
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitMessage('');
+      }, 5000);
+    }, 1000);
+  };
+
 
   // Smooth scrolling and active section highlighting
   useEffect(() => {
@@ -81,6 +163,28 @@ const App = () => {
       tech: ['Hyperledger Fabric', 'Node.js', 'React.js', 'Docker'],
       image: '/img/kima.jpg', // Placeholder image
       link: 'https://kimaeth.xyz/'
+    }
+  ];
+
+
+  const testimonials = [
+    {
+      name: 'Sarah Johnson',
+      title: 'Product Manager at TechCorp',
+      quote: 'Azam delivered exceptional blockchain solutions that exceeded our expectations. His attention to detail and technical expertise are outstanding.',
+      rating: 5
+    },
+    {
+      name: 'Michael Chen',
+      title: 'CTO at StartupX',
+      quote: 'Working with Azam was a game-changer for our project. His full-stack development skills and blockchain knowledge are impressive.',
+      rating: 5
+    },
+    {
+      name: 'Emily Rodriguez',
+      title: 'Founder of CryptoVentures',
+      quote: 'Azam built our entire DeFi platform from scratch. The code quality and user experience are top-notch. Highly recommended!',
+      rating: 5
     }
   ];
 
@@ -302,8 +406,8 @@ const App = () => {
           </div>
         </section>
 
-        {/* Testimonials Section (Optional) */}
-        {/* <section id="testimonials" className="py-16 md:py-24 bg-gray-950 px-6 sm:px-10 lg:px-20">
+  {/* Testimonials Section (Optional) */}
+        <section id="testimonials" className="py-16 md:py-24 bg-gray-950 px-6 sm:px-10 lg:px-20">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">
               What People <span className="text-gradient">Say</span>
@@ -331,11 +435,12 @@ const App = () => {
               ))}
             </div>
           </div>
-        </section> */}
+        </section> 
+
 
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 bg-gray-900 px-6 sm:px-10 lg:px-20">
+        {/* <section id="contact" className="py-16 md:py-24 bg-gray-900 px-6 sm:px-10 lg:px-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-12">
               Get In <span className="text-gradient">Touch</span>
@@ -365,16 +470,320 @@ const App = () => {
                 <Linkedin size={36} />
               </a>
               {/* Add more social icons if needed, e.g., Twitter, Medium */}
+            {/* </div>
+          </div>
+        </section> */} 
+        </main>
+      
+
+
+      {/* Contact Section */}
+        <section id="contact" className="py-16 md:py-24 bg-gray-900 px-6 sm:px-10 lg:px-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                Get In <span className="text-gradient">Touch</span>
+              </h2>
+              <p className="text-lg text-gray-300 mb-8">
+                Ready to bring your project to life? Fill out the form below and I'll get back to you within 24 hours.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Contact Form */}
+              <div className="bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-700">
+                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <Briefcase className="mr-3 text-purple-400" size={24} />
+                  Project Inquiry Form
+                </h3>
+                
+                {submitMessage && (
+                  <div className="mb-6 p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-200 text-sm">
+                    {submitMessage}
+                  </div>
+                )}
+
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  {/* Name and Email Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                        placeholder="Your full name"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Company */}
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                      Company/Organization
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                      placeholder="Your company name (optional)"
+                    />
+                  </div>
+
+                  {/* Project Type */}
+                  <div>
+                    <label htmlFor="projectType" className="block text-sm font-medium text-gray-300 mb-2">
+                      Project Type *
+                    </label>
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="blockchain-dapp">Blockchain/DApp Development</option>
+                      <option value="web-application">Web Application</option>
+                      <option value="mobile-app">Mobile App Development</option>
+                      <option value="smart-contracts">Smart Contracts</option>
+                      <option value="nft-marketplace">NFT Marketplace</option>
+                      <option value="defi-platform">DeFi Platform</option>
+                      <option value="full-stack">Full-Stack Development</option>
+                      <option value="consulting">Technical Consulting</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Requirements */}
+                  <div>
+                    <label htmlFor="requirements" className="block text-sm font-medium text-gray-300 mb-2">
+                      Project Requirements *
+                    </label>
+                    <textarea
+                      id="requirements"
+                      name="requirements"
+                      value={formData.requirements}
+                      onChange={handleInputChange}
+                      required
+                      rows={4}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300 resize-none"
+                      placeholder="Describe your project requirements, features needed, target audience, etc."
+                    />
+                  </div>
+
+                  {/* Budget and Deadline Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="budget" className="block text-sm font-medium text-gray-300 mb-2">
+                        Budget Range *
+                      </label>
+                      <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                      >
+                        <option value="">Select budget range</option>
+                        <option value="under-5k">Under $5,000</option>
+                        <option value="5k-10k">$5,000 - $10,000</option>
+                        <option value="10k-25k">$10,000 - $25,000</option>
+                        <option value="25k-50k">$25,000 - $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value="100k-plus">$100,000+</option>
+                        <option value="discuss">Let's discuss</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="deadline" className="block text-sm font-medium text-gray-300 mb-2">
+                        Project Deadline *
+                      </label>
+                      <select
+                        id="deadline"
+                        name="deadline"
+                        value={formData.deadline}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300"
+                      >
+                        <option value="">Select timeline</option>
+                        <option value="asap">ASAP</option>
+                        <option value="1-month">Within 1 month</option>
+                        <option value="2-3-months">2-3 months</option>
+                        <option value="3-6-months">3-6 months</option>
+                        <option value="6-months-plus">6+ months</option>
+                        <option value="flexible">Flexible</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Additional Details */}
+                  <div>
+                    <label htmlFor="additionalDetails" className="block text-sm font-medium text-gray-300 mb-2">
+                      Additional Details / Sample Links
+                    </label>
+                    <textarea
+                      id="additionalDetails"
+                      name="additionalDetails"
+                      value={formData.additionalDetails}
+                      onChange={handleInputChange}
+                      rows={3}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors duration-300 resize-none"
+                      placeholder="Any additional information, specific technologies, or questions you'd like to discuss..."
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2" size={20} />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-8">
+                <div className="bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-700">
+                  <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <MessageCircle className="mr-3 text-purple-400" size={24} />
+                    Let's Connect
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-purple-600 rounded-full p-2 flex-shrink-0">
+                        <Mail className="text-white" size={20} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Email</h4>
+                        <p className="text-gray-300">zamzamdestiny@gmail.com</p>
+                        <p className="text-sm text-gray-400">I typically respond within 24 hours</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-purple-600 rounded-full p-2 flex-shrink-0">
+                        <Phone className="text-white" size={20} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Phone</h4>
+                        <p className="text-gray-300">+1 (555) 123-4567</p>
+                        <p className="text-sm text-gray-400">Available Mon-Fri, 9AM-6PM EST</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-purple-600 rounded-full p-2 flex-shrink-0">
+                        <MapPin className="text-white" size={20} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-medium mb-1">Location</h4>
+                        <p className="text-gray-300">San Francisco, CA</p>
+                        <p className="text-sm text-gray-400">Available for remote work worldwide</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Social Links */}
+                <div className="bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-700">
+                  <h3 className="text-2xl font-semibold text-white mb-6">Follow My Work</h3>
+                  <div className="flex space-x-4">
+                    <a
+                      href="https://github.com/azamdestiny"
+                      className="bg-gray-700 p-3 rounded-full hover:bg-purple-600 transition-colors duration-300 group"
+                    >
+                      <Github className="text-gray-300 group-hover:text-white" size={24} />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/azam-destiny"
+                      className="bg-gray-700 p-3 rounded-full hover:bg-purple-600 transition-colors duration-300 group"
+                    >
+                      <Linkedin className="text-gray-300 group-hover:text-white" size={24} />
+                    </a>
+                    <a
+                      href="https://x.com/dosant45?s=21"
+                      className="bg-gray-700 p-3 rounded-full hover:bg-purple-600 transition-colors duration-300 group"
+                    >
+                      <Twitter className="text-gray-300 group-hover:text-white" size={24} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-700">
+                  <h3 className="text-2xl font-semibold text-white mb-6">Quick Stats</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-purple-400 mb-2">50+</div>
+                      <div className="text-sm text-gray-300">Projects Completed</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-purple-400 mb-2">98%</div>
+                      <div className="text-sm text-gray-300">Client Satisfaction</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-purple-400 mb-2">24h</div>
+                      <div className="text-sm text-gray-300">Response Time</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-purple-400 mb-2">5+</div>
+                      <div className="text-sm text-gray-300">Years Experience</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-      </main>
 
       {/* Footer */}
       <footer className="bg-gray-950 py-8 text-center text-gray-400 text-sm border-t border-gray-800">
         <p>&copy; {new Date().getFullYear()} Azam Portfolio. All rights reserved.</p>
       </footer>
+    
     </div>
+    
   );
 };
 
