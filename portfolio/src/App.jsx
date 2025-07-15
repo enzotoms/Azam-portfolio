@@ -730,7 +730,7 @@ Please respond to this inquiry at your earliest convenience.
                   <h3 className="text-2xl font-semibold text-white mb-6">Follow My Work</h3>
                   <div className="flex space-x-4">
                     <a
-                      href="https://github.com/azamdestiny"
+                      href="https://github.com/zamzamdesi"
                       className="bg-gray-700 p-3 rounded-full hover:bg-purple-600 transition-colors duration-300 group"
                     >
                       <Github className="text-gray-300 group-hover:text-white" size={24} />
